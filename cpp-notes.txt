@@ -1,0 +1,232 @@
+add ; at the end of each sentence to indicate end
+cout --> print character
+<< --> output
+.exe --> processable file
+endl --> end line, if without, print in same line
+// --> single line noting
+/*
+multi-line noting
+*/
+using namespace std; --> use traslator{compile(can compile error(not in format)), translate and run(can runtime error(/0))}
+return 0 --> (safe) quit the whole function
+cin a int : ignore other non integer stuff
+double --> float
+变量's name --> can include $, UPPERCASE but cannot start with number, - and " "(space)
+cin --> input
+>> --> input
+if() --> if (something) is true, run the commend in the tab'ed level or {}(optional for multiple lines)
+valuable created in {} can only work in that {}
+else --> else
+else if --> elif
+& -> binary and
+&& <--> and(need both true)
+|| <--> or(either one true)
+! <--> not(false to true, true to false)
+Highest > lowest
+! > */% > +- > <>>=<===!= > && > || > +=-=*=/=%=
+while (boolean){} --> if true, repeat
+for (<1>;boolean;<2>) {}--> <1> -> if true -> <2> -> {} -> repeat boolean
+break
+//#Clion or #dev
+short/int(4)/long/long long(8) --> type of integer, the more right the higher ablility to store larger number(or smaller of negative)
+float/double --> the more right the more sig. fig. able to store
+e(3e2) --> 10^(300)
+sizeof --> how many character/word/number
+\n --> endl but can be in middle of line
+/ --> default 整除 (diff with Python)
+++ --> +=
+-- --> -=
+system("pause") --> stop until any input
+c=a>b ? a : b --> if a>b, c=a, else c=b
+switch(a){case b:
+              command 1;
+              break;
+          case c:
+          default:
+              command 2;
+          }           --> if a==b, run command 1 then leave , if a==c, run nothing, run command 2
+while(){} --> when () is true, run command in {}
+continue --> immidiately on to next loop without going command after continue
+(type of variables) (name of variables)[length of list]={,}
+empty unit in list default 0
+first unit is [0]
+int score[2][5]={{0,0,0,0,0}{0,0,0,0,0}} --> multi-dimension
+int a[3][3]={1,2,3,4,5,6} --> {1,2,3}{4,5,6}
+void name(int num1){} --> a function(void:type of returned value,can be any data type)(int num1:valuable in function) --> name(a) --> run name with a as num1 --> int: a number, void:commands --> variables in function are independent unless int&(actually using the variable) --> all can break with return
+int name(int num1); --> setting the type of function
+include "name.h" --> using all function in the .h file call "name.h"
+sqrt()-->sqruae root
+printf("the asd is : %.4f",r) --> leave 4 decimal place
+const int --> unchangable value
+<vector>
+vector<int> numbers; --> create empty vector
+numbers.push_back(); --> add to the back of the vector(list with changable length)
+numbers.size() --> length of vector
+numbers.resize()
+numbers[0] --> vector support random visit, stack and quene don't
+vector<int> arr(n,1) --> a vector with a length of n, all value are 1
+number.clear()
+number.pop_back() --> remove the last value
+number.erase(iterator) --> delete iterator(vec.begin()+value) (don't use in practical unless necessary)
+str[1] --> first thing of the srting
+str.length()
+struct Data{
+    int a1; --> type of variables
+    Data(int a):a1(a) --> create function,apply variable(or skip those after":",apply inside function)
+    {
+        
+    }
+}; --> no return , function need to be the same with the starting name , can contain other function that able to use the variables in the outer variable
+Data d1(6) --> a1 of d1 is now 6
+d1.a1
+vector<Data> data1; --> vector with multi kind of variable
+data1.push_back({}) --> still count as one variable
+unordered_map --> list that able to combine string or int with a key (unordered_map[0]) and value(unordered_map["ignore"])
+map --> unordered_map but ordered
+for (auto& x: my_map) {
+        cout << "Key: " << x.first << ", Value: " << x.second << endl;
+    }
+unordered_map<string, int> myMap;
+my_map.insert(make_pair())
+my_map[new_value]=0
+for(auto& i:vector_name) cout<<i<<endl; --> print all value
+queue --> first in first out
+stack --> first in last out
+stack<int> name
+name.push()
+name.pop()
+name.top() --> the only way of visit stack can use
+name.front() -- for queue
+name.empty() --> a boolean
+sort(arr.begin(),arr.end(),cmp) --> cmp is a boolean of sorting rule, use quick sort
+set<int> cur_set; --> default a sequence, without repetition
+unordered_set --> wouldn't default sequence
+cur_set.insert(1)
+cur_set.erase(1) --> remove a fixed value
+cur_set.count(1) --> value exist or not
+O(n) --> big-O notation --> time/space complexity is n:how many times the loop can max ran/how many space used during process and output(ignore skip/common number/constant comlexity, take variable that affect the loop most)
+"below are time complexity"
+O(1) --> constant complexity
+O(n^2) --> loop in loop (O(n) if loop don't stack)
+O(1e8) --> overtime
+O(logn) --> sort/set
+O(nlogn) --> log2n but each time run n times
+O(1)<O(logn)<O(n)<O(nlogn)<O(n^2)<O(2^n)<O(n!)
+ListNode *next;
+log2n --> 2^n
+"below are space complexity"
+O(n^2) --> vector in vector
+stl
+char --> a character
+string -->  a bunch of char, end when space
+turn char to int --> the ASCII of that char
+turn int to char --> the char of that ASCII
+char's <==> --> compare the ASCII
+ASCII +32 --> capital letter to small letter
+'1'-'0'=1
+1+'0'='1'
+getline(cin,str) --> get string with space
+string str(n'.') --> make a string with n dots
+\0 --> char's end
+string variable can add string, but not char
+stoi / to_string / stof --> string to int / anything to string / string to float
+compare string --> compare ASCII
+""+"" --> error
+a=b<c?a:d --> if (b<c)=true, a=a, else, a=d
+a=min(a,b) --> which smaller take place
+vector<vector<int>> vec(5,vector<int>(6,0))
+vector<int> v[5]
+pair<type,type> --> struct with two data --> pair.first, pair.second
+greedy algorithm --> best solution of each step == solution of problem
+bitset<n> int --> turn into binary
+
+& --> address where thing stored in --> non-local
+* --> what thing stored in address
+int* b=&a --> b use address of a
+different data type allows different data length(e.g. int->2^32-1)
+*arr --> what address of arr represent
+array --> a continuosly packed, length fixed, data type fixed data structure
+//storage
+[ ][ ][1][3][2][5][ ][ ]
+[ ][ ][ ][ ][ ][ ][ ][ ]
+//all bits in third brancket store 1
+//easy visit
+linked list --> a loosely packed data structure with a pointer(node) to find next data
+//storage
+[1][A][ ][ ][ ][5][D][ ]
+[ ][ ][3][B][ ][ ][2][C]
+//A,B,C,D are nodes
+//only 1 and A are stored -> perform linear search
+//A->3,B->2,C->5,D->None(nullptr)
+//When inserting and deleting,only changing node is needed
+ListNode --> pointer in storage
+*next
+n0=->next=n1 --> link a ListNode to another's end
+list<>
+list.push_back
+list.push_front
+auto it=list.begin() --> only in c++17 --> imagine it & a specific value
+//can be used as searching in an list that do not support direct access
+lower_bound --> for SEQUENCED num list
+upper_bound
+advance(it,1) --> move it by 1
+list.pop_back
+list.pop_front
+erase(it)
+BinaryTree --> non-linear data structure
+TreeNode* n1=new TreeNode(1) --> creating a tree node and its value
+n1->left =n2 --> left node of n1 point to node of n2(can point right or built variable value)
+https://www.hello-algo.com/chapter_tree/binary_tree/#1
+*left
+*right
+  A
+ / \
+ B  C
+/ \
+D E
+//C,D,E are leaf nodes
+//A is root node
+//height and depth of B/D are 1,1/0,2
+breadth-first search
+Binary Indexed Tree
+//using queue
+  A
+ / \
+ B  C
+/ \
+D E
+|(union find)
+v
+ A
+/|\\
+BCDE
+graph --> non-linear data srtucture
+//undirected(two-way relationship) and directed(independent relationship)/connected and disconnected(at least one pt unreachable)/weighted(relationships have weight) or not
+A-B-E
+| |/
+C-D
+int a[n] where n<10e8
+https://stackoverflow.com/questions/4622225/arent-boolean-variables-always-false-by-default
+subarray/perfix sum/difference --> avoid frequent direct access on array(e.g. every single one)
+Dijkstra
+https://www.bilibili.com/video/BV1zz4y1m7Nq/?spm_id_from=333.337.search-card.all.click&vd_source=2e449fdeb1e8ca45704163cef46e42ee
+str.substr(<pos>,<n>)
+next_permutation(<first>,<last>)-->keep making sequence
+do{}while()
+freopen --> only use in olypiad
+Dynamic Planning
+Sum of solutions of small problems=Solution of big problem AND repetitive method of solving --> find recurrance relationship
+binarySearch --> find a target in a ordered list by checking mid
+
+https://usaco.guide/bronze/ad-hoc?lang=cpp
+Steps to solve problem
+1. Look for data range
+2. Brute force --> create all possibilities
+3. Try test case
+4. Improve
+input-->process-->output-->input
+don't believe the above statement be flexible
+separating a problem into few tiny ones
+done each question in 1hr 30min
+think about a must-case --> work if work, not work if not work
+clear lines
