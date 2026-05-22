@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A futuristic personal introduction homepage for Tan Yat Hang Matthew." />
+  <title>Tan Yat Hang Matthew | Science & Computing Portfolio</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-2: #07111f;
+      --card: rgba(12, 24, 43, 0.72);
+      --card-strong: rgba(14, 33, 60, 0.86);
+      --line: rgba(120, 230, 255, 0.24);
+      --cyan: #67e8f9;
+      --blue: #60a5fa;
+      --purple: #a78bfa;
+      --green: #8cffd2;
+      --text: #e5f7ff;
+      --muted: #94a3b8;
+      --warm: #f8d879;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.28), transparent 28rem),
+        radial-gradient(circle at 88% 8%, rgba(167, 139, 250, 0.25), transparent 25rem),
+        radial-gradient(circle at 52% 92%, rgba(103, 232, 249, 0.13), transparent 24rem),
+        linear-gradient(135deg, var(--bg), var(--bg-2) 52%, #020617);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      content: "";
+      background-image:
+        linear-gradient(rgba(103, 232, 249, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(103, 232, 249, 0.055) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 88%);
+    }
+
+    body::after {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      content: "";
+      background: linear-gradient(115deg, transparent 0%, rgba(103, 232, 249, 0.05) 46%, transparent 52%);
+      animation: scan 8s linear infinite;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 16px auto 0;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(4, 12, 25, 0.68);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(103, 232, 249, 0.54);
+      border-radius: 50%;
+      color: var(--cyan);
+      background: radial-gradient(circle, rgba(103, 232, 249, 0.22), rgba(96, 165, 250, 0.08));
+      box-shadow: 0 0 26px rgba(103, 232, 249, 0.34);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #03131e;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 22px rgba(103, 232, 249, 0.35);
+      outline: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: 30px;
+      align-items: center;
+      min-height: calc(100vh - 88px);
+      padding: 72px 0 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid rgba(103, 232, 249, 0.32);
+      border-radius: 999px;
+      color: var(--cyan);
+      background: rgba(103, 232, 249, 0.08);
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px var(--green);
+      animation: pulse 1.55s ease-in-out infinite;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      max-width: 780px;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(120deg, #ffffff 4%, var(--cyan) 35%, var(--purple) 68%, #ffffff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      filter: drop-shadow(0 0 26px rgba(103, 232, 249, 0.2));
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      color: #c7d2fe;
+      font-size: clamp(1.02rem, 1.6vw, 1.22rem);
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 19px;
+      overflow: hidden;
+      border: 1px solid rgba(103, 232, 249, 0.42);
+      border-radius: 999px;
+      color: #e0fbff;
+      background: rgba(12, 24, 43, 0.76);
+      box-shadow: 0 0 0 1px rgba(103, 232, 249, 0.08), 0 20px 48px rgba(0, 0, 0, 0.24);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .button.primary {
+      color: #04111d;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--cyan), var(--blue) 56%, var(--purple));
+      font-weight: 800;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      border-color: rgba(103, 232, 249, 0.72);
+      box-shadow: 0 22px 58px rgba(103, 232, 249, 0.18);
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 560px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(13, 28, 52, 0.8), rgba(9, 18, 35, 0.58));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      position: absolute;
+      inset: -1px;
+      content: "";
+      background:
+        radial-gradient(circle at 30% 20%, rgba(103, 232, 249, 0.28), transparent 24%),
+        radial-gradient(circle at 82% 62%, rgba(167, 139, 250, 0.22), transparent 28%);
+      opacity: 0.9;
+    }
+
+    .orbital-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      min-height: 516px;
+      place-items: center;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 26px;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        rgba(2, 6, 23, 0.38);
+      background-size: 22px 22px;
+      overflow: hidden;
+    }
+
+    .core {
+      position: relative;
+      display: grid;
+      width: min(330px, 78vw);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(103, 232, 249, 0.26);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(103, 232, 249, 0.16), rgba(96, 165, 250, 0.06) 46%, transparent 70%);
+      box-shadow: inset 0 0 42px rgba(103, 232, 249, 0.08), 0 0 68px rgba(103, 232, 249, 0.22);
+    }
+
+    .core::before,
+    .core::after {
+      position: absolute;
+      inset: 28px;
+      content: "";
+      border: 1px dashed rgba(103, 232, 249, 0.28);
+      border-radius: 50%;
+      animation: rotate 18s linear infinite;
+    }
+
+    .core::after {
+      inset: 72px;
+      border-color: rgba(167, 139, 250, 0.3);
+      animation-duration: 10s;
+      animation-direction: reverse;
+    }
+
+    .portrait-frame {
+      position: relative;
+      z-index: 2;
+      width: min(255px, 70vw);
+      aspect-ratio: 3 / 4.35;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(103, 232, 249, 0.18), rgba(167, 139, 250, 0.14));
+      box-shadow: 0 30px 82px rgba(103, 232, 249, 0.24);
+      transform: rotate(-3deg);
+    }
+
+    .portrait-frame::before {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      content: "";
+      background:
+        linear-gradient(180deg, rgba(103, 232, 249, 0.16), transparent 24%, transparent 72%, rgba(2, 6, 23, 0.68)),
+        linear-gradient(90deg, rgba(103, 232, 249, 0.18), transparent 18%, transparent 82%, rgba(167, 139, 250, 0.18));
+      pointer-events: none;
+    }
+
+    .portrait-frame::after {
+      position: absolute;
+      inset: 10px;
+      z-index: 3;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      filter: saturate(1.08) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    .portrait-scan {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.28), transparent);
+      mix-blend-mode: screen;
+      opacity: 0.36;
+      animation: portraitScan 4.5s ease-in-out infinite;
+    }
+
+    .floating-chip {
+      position: absolute;
+      z-index: 3;
+      padding: 11px 13px;
+      border: 1px solid rgba(103, 232, 249, 0.26);
+      border-radius: 16px;
+      color: #dffaff;
+      background: rgba(5, 13, 28, 0.75);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+      font-size: 0.87rem;
+      animation: float 4.6s ease-in-out infinite;
+    }
+
+    .chip-1 { top: 54px; left: 28px; }
+    .chip-2 { top: 120px; right: 22px; animation-delay: -1s; }
+    .chip-3 { right: 40px; bottom: 94px; animation-delay: -2s; }
+    .chip-4 { left: 35px; bottom: 54px; animation-delay: -3s; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: -12px;
+      padding-bottom: 62px;
+    }
+
+    .stat-card,
+    .section-card,
+    .timeline-item,
+    .quote-card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .stat-card {
+      min-height: 128px;
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .stat-value {
+      color: var(--cyan);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .academic-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .academic-card {
+      position: relative;
+      min-height: 255px;
+      padding: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(145deg, rgba(103, 232, 249, 0.12), transparent 34%),
+        rgba(12, 24, 43, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .academic-card::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 18px 18px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 72%);
+      pointer-events: none;
+    }
+
+    .academic-subject,
+    .academic-score,
+    .academic-meta,
+    .score-bars,
+    .score-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    .academic-subject {
+      min-height: 44px;
+      color: #f8fbff;
+      font-size: 1.05rem;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .academic-score {
+      margin: 18px 0 6px;
+      color: var(--cyan);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 950;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-shadow: 0 0 24px rgba(103, 232, 249, 0.28);
+    }
+
+    .academic-meta {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .score-bars {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      color: #dbeafe;
+      font-size: 0.78rem;
+    }
+
+    .score-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+    }
+
+    .score-fill {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
+      box-shadow: 0 0 16px rgba(103, 232, 249, 0.32);
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .kicker {
+      color: var(--cyan);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .section-note {
+      max-width: 420px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .section-card {
+      position: relative;
+      min-height: 230px;
+      padding: 24px;
+      overflow: hidden;
+      border-radius: 28px;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .section-card::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: radial-gradient(circle at 20% 0%, rgba(103, 232, 249, 0.16), transparent 34%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(103, 232, 249, 0.46);
+      background: var(--card-strong);
+    }
+
+    .section-card:hover::before {
+      opacity: 1;
+    }
+
+    .icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(103, 232, 249, 0.34);
+      border-radius: 16px;
+      color: var(--cyan);
+      background: rgba(103, 232, 249, 0.09);
+      font-size: 1.4rem;
+    }
+
+    h3 {
+      position: relative;
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+    }
+
+    .section-card p,
+    .timeline-item p,
+    .quote-card p {
+      position: relative;
+      margin: 0;
+      color: #b7c6d9;
+      line-height: 1.75;
+    }
+
+    .tag-list {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 999px;
+      color: #dbeafe;
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 0.82rem;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 12px;
+      bottom: 12px;
+      left: 24px;
+      width: 1px;
+      content: "";
+      background: linear-gradient(var(--cyan), rgba(167, 139, 250, 0.15));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-left: 54px;
+      padding: 22px 24px;
+      border-radius: 24px;
+    }
+
+    .timeline-item::before {
+      position: absolute;
+      top: 25px;
+      left: -42px;
+      width: 13px;
+      height: 13px;
+      content: "";
+      border: 3px solid #08111f;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
+    }
+
+    .time {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--warm);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .quote-card {
+      position: relative;
+      padding: 32px;
+      overflow: hidden;
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(103, 232, 249, 0.13), transparent 35%),
+        rgba(12, 24, 43, 0.74);
+    }
+
+    .quote-card blockquote {
+      margin: 0;
+      color: #f8fbff;
+      font-size: clamp(1.45rem, 3vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+
+    .quote-card p {
+      max-width: 760px;
+      margin-top: 18px;
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.86); opacity: 0.72; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-70%); }
+      100% { transform: translateX(70%); }
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes portraitScan {
+      0%, 100% { transform: translateY(-72%); }
+      50% { transform: translateY(72%); }
+    }
+
+    @media (max-width: 920px) {
+      .nav {
+        align-items: flex-start;
+        border-radius: 28px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 58px;
+      }
+
+      .hero-panel {
+        min-height: 460px;
+      }
+
+      .orbital-card {
+        min-height: 416px;
+      }
+
+      .stats,
+      .grid.two,
+      .grid.three {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .academic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 18vw, 4.5rem);
+      }
+
+      .stats,
+      .grid.two,
+      .grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .academic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: 420px;
+        padding: 14px;
+        border-radius: 24px;
+      }
+
+      .orbital-card {
+        min-height: 390px;
+      }
+
+      .core {
+        width: 272px;
+      }
+
+      .floating-chip {
+        font-size: 0.76rem;
+      }
+
+      .chip-1 { left: 14px; }
+      .chip-2 { right: 12px; }
+      .chip-3 { right: 18px; bottom: 70px; }
+      .chip-4 { left: 18px; bottom: 36px; }
+
+      section {
+        padding: 52px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network" aria-hidden="true"></canvas>
+
+  <nav class="nav shell" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <span class="brand-mark">M</span>
+      <span>Matthew OS</span>
+    </a>
+    <div class="nav-links">
+      <a href="#profile">Profile</a>
+      <a href="#academics">Academics</a>
+      <a href="#skills">Signals</a>
+      <a href="#timeline">Trajectory</a>
+      <a href="#values">Values</a>
+    </div>
+  </nav>
+
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="reveal">
+        <div class="eyebrow"><span class="pulse-dot"></span> Science · Computing · Curiosity</div>
+        <h1><span class="gradient-text">Tan Yat Hang Matthew</span></h1>
+        <p class="hero-copy">
+          I am a student driven by scientific exploration and computational thinking. From chemistry experiments and ICT projects to USACO algorithmic challenges, I enjoy breaking unknowns into verifiable problems and turning ideas into clear, reliable, and accessible digital solutions.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#profile">Launch Profile</a>
+          <a class="button" href="SLP.pdf" target="_blank" rel="noreferrer">View Original SLP</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel reveal" aria-label="Futuristic personal identity visual">
+        <div class="orbital-card">
+          <div class="floating-chip chip-1">USACO Silver</div>
+          <div class="floating-chip chip-2">Chemistry · ICT</div>
+          <div class="floating-chip chip-3">Prefect Leadership</div>
+          <div class="floating-chip chip-4">Clarinet · Media</div>
+          <div class="core">
+            <div class="portrait-frame">
+              <img class="portrait-img" src="pic.jpg" alt="Tan Yat Hang Matthew in graduation attire" />
+              <span class="portrait-scan"></span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="stats reveal" aria-label="Key metrics">
+      <div class="stat-card">
+        <div class="stat-value">Top 3</div>
+        <div class="stat-label">Ranked among the top performers in Chemistry and ICT during S.4 and S.5</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">182.8</div>
+        <div class="stat-label">Peak Mathematics score in S.4, showing strong quantitative ability</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">145</div>
+        <div class="stat-label">Peak Chemistry score in S.4, reflecting solid science performance</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">140.2</div>
+        <div class="stat-label">Latest Physics score in S.6, highlighting consistent STEM strength</div>
+      </div>
+    </div>
+
+    <section id="academics">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Academic Highlights</div>
+          <h2>Strongest Subject Performance</h2>
+        </div>
+        <p class="section-note">The strongest academic signals come from STEM-related subjects, especially Mathematics, Chemistry, ICT, Physics, and Mathematics Extended Part Module 2.</p>
+      </div>
+
+      <div class="academic-grid">
+        <article class="academic-card reveal">
+          <div class="academic-subject">Mathematics</div>
+          <div class="academic-score">182.8</div>
+          <div class="academic-meta">Best score · S.4 · out of 200</div>
+          <div class="score-bars" aria-label="Mathematics scores by school year">
+            <div class="score-row"><span>S.6</span><div class="score-track"><span class="score-fill" style="width: 88.8%;"></span></div><strong>177.6</strong></div>
+            <div class="score-row"><span>S.5</span><div class="score-track"><span class="score-fill" style="width: 82%;"></span></div><strong>164</strong></div>
+            <div class="score-row"><span>S.4</span><div class="score-track"><span class="score-fill" style="width: 91.4%;"></span></div><strong>182.8</strong></div>
+          </div>
+        </article>
+
+        <article class="academic-card reveal">
+          <div class="academic-subject">Mathematics Extended Part Module 2</div>
+          <div class="academic-score">142.1</div>
+          <div class="academic-meta">Latest score · S.6 · out of 160</div>
+          <div class="score-bars" aria-label="Mathematics Module 2 scores by school year">
+            <div class="score-row"><span>S.6</span><div class="score-track"><span class="score-fill" style="width: 88.8%;"></span></div><strong>142.1</strong></div>
+            <div class="score-row"><span>S.5</span><div class="score-track"><span class="score-fill" style="width: 83.2%;"></span></div><strong>133.1</strong></div>
+            <div class="score-row"><span>S.4</span><div class="score-track"><span class="score-fill" style="width: 0%;"></span></div><strong>—</strong></div>
+          </div>
+        </article>
+
+        <article class="academic-card reveal">
+          <div class="academic-subject">Chemistry</div>
+          <div class="academic-score">145</div>
+          <div class="academic-meta">Best score · S.4 · out of 160</div>
+          <div class="score-bars" aria-label="Chemistry scores by school year">
+            <div class="score-row"><span>S.6</span><div class="score-track"><span class="score-fill" style="width: 81.8%;"></span></div><strong>130.8</strong></div>
+            <div class="score-row"><span>S.5</span><div class="score-track"><span class="score-fill" style="width: 87.6%;"></span></div><strong>140.2</strong></div>
+            <div class="score-row"><span>S.4</span><div class="score-track"><span class="score-fill" style="width: 90.6%;"></span></div><strong>145</strong></div>
+          </div>
+        </article>
+
+        <article class="academic-card reveal">
+          <div class="academic-subject">Information and Communication Technology</div>
+          <div class="academic-score">138.7</div>
+          <div class="academic-meta">Best score · S.4 · out of 160</div>
+          <div class="score-bars" aria-label="ICT scores by school year">
+            <div class="score-row"><span>S.6</span><div class="score-track"><span class="score-fill" style="width: 81.7%;"></span></div><strong>130.7</strong></div>
+            <div class="score-row"><span>S.5</span><div class="score-track"><span class="score-fill" style="width: 84.9%;"></span></div><strong>135.9</strong></div>
+            <div class="score-row"><span>S.4</span><div class="score-track"><span class="score-fill" style="width: 86.7%;"></span></div><strong>138.7</strong></div>
+          </div>
+        </article>
+
+        <article class="academic-card reveal">
+          <div class="academic-subject">Physics</div>
+          <div class="academic-score">140.2</div>
+          <div class="academic-meta">Latest score · S.6 · out of 160</div>
+          <div class="score-bars" aria-label="Physics scores by school year">
+            <div class="score-row"><span>S.6</span><div class="score-track"><span class="score-fill" style="width: 87.6%;"></span></div><strong>140.2</strong></div>
+            <div class="score-row"><span>S.5</span><div class="score-track"><span class="score-fill" style="width: 83%;"></span></div><strong>132.8</strong></div>
+            <div class="score-row"><span>S.4</span><div class="score-track"><span class="score-fill" style="width: 84.4%;"></span></div><strong>135</strong></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="profile">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Profile Matrix</div>
+          <h2>From Curiosity to Execution</h2>
+        </div>
+        <p class="section-note">This homepage is shaped from the Student Learning Profile, highlighting academic performance, personal reflections, activities, awards, and public-facing strengths.</p>
+      </div>
+
+      <div class="grid three">
+        <article class="section-card reveal">
+          <div class="icon">⚗</div>
+          <h3>Science Explorer</h3>
+          <p>Long fascinated by the mechanics of the universe, chemical reactions, and scientific applications, I value precise measurement, evidence, and experiment-based understanding.</p>
+          <div class="tag-list">
+            <span class="tag">Chemistry</span>
+            <span class="tag">Physics</span>
+            <span class="tag">Scientific Mindset</span>
+          </div>
+        </article>
+
+        <article class="section-card reveal">
+          <div class="icon">⌘</div>
+          <h3>Algorithmic Thinking</h3>
+          <p>Through USACO training, I developed skills in greedy strategies, depth-first search, reverse thinking, and a technical foundation for future study.</p>
+          <div class="tag-list">
+            <span class="tag">USACO Silver</span>
+            <span class="tag">DFS</span>
+            <span class="tag">Problem Solving</span>
+          </div>
+        </article>
+
+        <article class="section-card reveal">
+          <div class="icon">◌</div>
+          <h3>Accessibility Mindset</h3>
+          <p>In an ICT project, I explored navigation needs for users with color-vision deficiencies, studied WCAG, and connected technical implementation with human-centered design.</p>
+          <div class="tag-list">
+            <span class="tag">ICT</span>
+            <span class="tag">WCAG</span>
+            <span class="tag">Inclusive Design</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Capability Signals</div>
+          <h2>Capability Signals</h2>
+        </div>
+        <p class="section-note">Beyond outcomes, these signals show the working habits behind them: focus, collaboration, detail control, and interdisciplinary connection.</p>
+      </div>
+
+      <div class="grid two">
+        <article class="section-card reveal">
+          <div class="icon">▣</div>
+          <h3>Self-Directed Challenge</h3>
+          <p>When facing algorithmic problems beyond the school curriculum, I progress through experimentation, self-learning, and reflection, achieving 1000/1000 in the USACO 2025 January Bronze Contest.</p>
+        </article>
+
+        <article class="section-card reveal">
+          <div class="icon">⇄</div>
+          <h3>Clear Communication</h3>
+          <p>As a Discipline Prefect, I learned to communicate directly with teammates and schoolmates during major school events and complete tasks with clarity and steadiness.</p>
+        </article>
+
+        <article class="section-card reveal">
+          <div class="icon">♬</div>
+          <h3>Precision Through Music</h3>
+          <p>Playing clarinet and bass clarinet in the school orchestra helped me understand how basslines support harmony and trained my sensitivity to rhythm, dynamics, and detail.</p>
+        </article>
+
+        <article class="section-card reveal">
+          <div class="icon">◈</div>
+          <h3>Media Production</h3>
+          <p>As a senior producer in the HD Campus TV Team, I worked on event filming, equipment operation, and editing workflows, turning technical details into polished output.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Trajectory Log</div>
+          <h2>Growth Trajectory</h2>
+        </div>
+        <p class="section-note">A chronological view of key moments across academics, competitions, service, and the arts.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <span class="time">2021–2022</span>
+          <h3>Project-based Learning · 3rd Place Grand Award</h3>
+          <p>Participated as a project member and gained foundational experience in developing ideas from concept to presentation.</p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="time">2022–2023</span>
+          <h3>Music Theory & Science Exposure</h3>
+          <p>Earned distinction in Grade 5 Music Theory while joining CityU science-related learning experiences covering holograms, signals, and recycling art.</p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="time">2023–2025</span>
+          <h3>Discipline Prefect & Campus TV</h3>
+          <p>Built responsibility, communication skills, and execution discipline through school service and media production, earning the Long Service Award and Outstanding Performance Award.</p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="time">2024–2025</span>
+          <h3>USACO · From Bronze to Silver</h3>
+          <p>Used algorithmic training to go beyond the regular curriculum, moving from a full-score Bronze foundation to the Silver Division and strengthening logical problem-solving.</p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="time">2025</span>
+          <h3>Science, Music & Future Readiness</h3>
+          <p>Continued building momentum through scientific learning, joint-school music competition Silver Awards, and interdisciplinary activities.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="values">
+      <div class="quote-card reveal">
+        <div class="kicker">Guiding Principle</div>
+        <blockquote>“Nothing in life is to be feared, it is only to be understood.”</blockquote>
+        <p>
+          Marie Curie’s words summarize how I learn: when facing the unknown, I break it down, observe, build, and understand. Science gives me the questions, programming gives me the tools, and collaboration and the arts teach me how individual ability fits into a larger system.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <p>© 2026 Tan Yat Hang Matthew · Built as a futuristic personal introduction homepage.</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width = 0;
+    let height = 0;
+    let particles = [];
+
+    function resizeCanvas() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      createParticles();
+    }
+
+    function createParticles() {
+      const count = Math.min(92, Math.max(42, Math.floor(width / 18)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.42,
+        vy: (Math.random() - 0.5) * 0.42,
+        r: Math.random() * 1.8 + 0.7
+      }));
+    }
+
+    function drawNetwork() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(103, 232, 249, 0.75)';
+
+      particles.forEach((particle) => {
+        if (!prefersReducedMotion) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+        }
+
+        if (particle.x < 0 || particle.x > width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > height) particle.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      for (let i = 0; i < particles.length; i += 1) {
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx.strokeStyle = `rgba(103, 232, 249, ${0.18 * (1 - distance / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(drawNetwork);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawNetwork();
+  </script>
+</body>
+</html>
