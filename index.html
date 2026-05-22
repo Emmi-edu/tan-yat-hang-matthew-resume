@@ -631,6 +631,26 @@
       font-size: 0.82rem;
     }
 
+    .project-spotlight {
+      margin-top: 18px;
+    }
+
+    .screenshot-card {
+      min-height: 320px;
+      padding: 0;
+    }
+
+    .project-screenshot {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      filter: saturate(1.08) contrast(1.04);
+    }
+
     .timeline {
       position: relative;
       display: grid;
@@ -1029,16 +1049,16 @@
     <section id="projects">
       <div class="section-head reveal">
         <div>
-          <div class="kicker">Featured Project</div>
-          <h2>Lox · Turn-Based Python Game</h2>
+          <div class="kicker">Featured Projects</div>
+          <h2>Games & Interactive Systems</h2>
         </div>
-        <p class="section-note">Lox is a console-based turn-based game built in Python, combining strategy, resource management, randomized encounters, and escalating boss fights.</p>
+        <p class="section-note">These projects show how I turn programming logic into playable systems, from a Python turn-based battle game to a visual Snake-inspired project.</p>
       </div>
 
       <div class="grid three">
         <article class="section-card reveal">
           <div class="icon">▻</div>
-          <h3>Strategic Rounds</h3>
+          <h3>Lox · Strategic Rounds</h3>
           <p>Players choose the number of rounds, aim missiles at monsters, manage health, collect gold, and survive increasingly dangerous enemy waves.</p>
           <div class="tag-list">
             <span class="tag">Python</span>
@@ -1049,7 +1069,7 @@
 
         <article class="section-card reveal">
           <div class="icon">✦</div>
-          <h3>Abilities & Upgrades</h3>
+          <h3>Lox · Abilities & Upgrades</h3>
           <p>The game includes super abilities such as Chaos, Heal Pack, Zapper, and Venom-plosion, giving each battle tactical choices beyond simple attacking.</p>
           <div class="tag-list">
             <span class="tag">Resource Management</span>
@@ -1060,13 +1080,31 @@
 
         <article class="section-card reveal">
           <div class="icon">◉</div>
-          <h3>Boss Encounters</h3>
+          <h3>Lox · Boss Encounters</h3>
           <p>Lox features monsters and bosses including Iron Monster, Vade Jr., VOX, Fool's Gold, and Lord Vade, creating a chaotic endgame challenge.</p>
           <div class="tag-list">
             <span class="tag">Boss Design</span>
             <span class="tag">Game Logic</span>
             <span class="tag">Interactive Story</span>
           </div>
+        </article>
+      </div>
+
+      <div class="grid two project-spotlight">
+        <article class="section-card reveal">
+          <div class="icon">◇</div>
+          <h3>GreedySnake · Visual Snake Game</h3>
+          <p>GreedySnake is a mini-game based on Snake. The player controls the snake, eats food to build score, switches between manual and automatic movement, and interacts with upgrade choices that make each run more dynamic.</p>
+          <div class="tag-list">
+            <span class="tag">C++</span>
+            <span class="tag">Snake Gameplay</span>
+            <span class="tag">Upgrade System</span>
+            <span class="tag">Auto Mode</span>
+          </div>
+        </article>
+
+        <article class="section-card screenshot-card reveal" aria-label="GreedySnake gameplay screenshot">
+          <img class="project-screenshot" src="greedysnake-gameplay03.png" alt="GreedySnake gameplay screenshot showing the snake map, score interface, and game controls." />
         </article>
       </div>
     </section>
